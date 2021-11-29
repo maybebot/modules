@@ -12,7 +12,20 @@ function rand (min: number, max: number) {
   return min + Math.round((Math.random() * (max - min)))
 }
 
-function fetchModuleStats (module: ModuleInfo) {
+async function fetchModuleStats (module: ModuleInfo) {
+  // TODO: this is quick and dirty, improve if it becomes relevant
+  const manifest = await $fetch(module.url + module.manifest)
+  const iconUrl = manifest.icons[0].src ?? ''
+  if (iconUrl.indexOf('http://') === 0 || iconUrl.indexOf('https://') === 0) {
+    module.icon = iconUrl
+  } else {
+    module.icon = module.url + iconUrl
+  }
+  module.name = manifest.short_name ?? manifest.name
+  module.description = manifest.description
+
+  console.log(module.icon)
+
   const ghRepo = module.repo.split('#')[0]
   module.downloads = rand(0, 500)
   module.stars = rand(0, 2000)
