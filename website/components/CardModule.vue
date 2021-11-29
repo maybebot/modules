@@ -22,8 +22,8 @@
       >
         <!-- TODO: use <nuxt-img> -->
         <img
-          v-if="!coverError && iconUrl(mod)"
-          :src="'https://api.nuxtjs.org/api/ipx/s_80,f_webp/gh/nuxt/modules/main/website/static/' + iconUrl(mod)"
+          v-if="!coverError && mod.icon"
+          :src="mod.icon"
           :alt="mod.name"
           class="w-10 h-10 object-contain"
           width="40px"
@@ -43,23 +43,9 @@
             class="i-carbon-badge text-yellow-600 text-lg ml-1 my-auto opacity-85"
           />
         </h2>
-        <div class="flex gap-2 py-3 w-full flex-wrap">
-          <div
-            v-for="{ tag, tagText, supportText, color, cssClass } of useModuleComptatibility(mod)"
-            :key="tag"
-            v-tooltip="{ content: tagText + ': ' + supportText, classes: tooltipClass }"
-            :style="{ color: color, background: color + '20' }"
-            :class="cssClass"
-            class="flex min-w-12 relative items-center gap-1 text-base rounded-lg px-2 py-1 z-50"
-          >
-            <iconNuxt3 v-if="tag === '3.x'" class="h-5 w-5" aria-hidden="true" />
-            <iconNuxt2 v-if="tag === '2.x'" class="h-5 w-5" aria-hidden="true" />
-            <iconNuxtBridge v-if="tag === '2.x-bridge'" class="h-5 w-5" aria-hidden="true" />
-            <div class="-mb-0.5">
-              {{ tag[0] }}
-            </div>
-          </div>
-        </div>
+        <h3>
+          {{ extractHostname(mod.url) }}
+        </h3>
       </div>
     </div>
 
@@ -74,52 +60,18 @@
     <div class="flex w-full z-30 relative">
       <div class="flex flex-none">
         <a
-          :href="mod.github"
+          :href="mod.url"
           aria-label="stars"
           target=" _blank"
           rel="noopener"
           class="flex whitespace-nowrap w-full mr-4 text-sky-dark hover:text-gray-400 dark:hover:text-secondary-lighter dark:text-white"
         >
-          <UnoIcon class="mr-2 i-carbon-star" />
+          <UnoIcon class="mr-2 i-carbon-download" />
           <div class="text-sm leading-5 font-medium truncate">
-            {{ numberFormat(mod.stars) }}
             <span
               class="hidden md:inline-block"
-            >star{{ mod.stars !== 1 ? 's' : '' }}</span>
+            >Go to website and install</span>
           </div>
-        </a>
-        <a
-          :href="npmUrl(mod)"
-          aria-label="npm"
-          target=" _blank"
-          rel="noopener"
-          class="flex whitespace-nowrap w-full mr-4 text-sky-dark hover:text-gray-400 dark:hover:text-secondary-lighter dark:text-white"
-        >
-          <UnoIcon class="mr-2 i-carbon-download" />
-          <div
-            class="text-sm leading-5 font-medium truncate"
-          >{{ numberFormat(mod.downloads) }} installs</div>
-        </a>
-      </div>
-      <div class="flex -space-x-3 hover:space-x-0 absolute right-0 -bottom-1 hover:bg-white  dark:hover:bg-sky-darkest">
-        <a
-          v-for="contributor of mod.contributors.slice(0, 5).reverse()"
-          :key="contributor.login"
-          v-tooltip="{ content: contributor.name || contributor.login, classes: ['bg-secondary-dark', 'dark:bg-sky-black', 'text-white', 'px-2', 'py-1', 'rounded', 'text-sm', 'mb-2'] }"
-          :aria-label="contributor.name || contributor.login"
-          :href="`https://github.com/${contributor.login}`"
-          target="_blank"
-          rel="noopener"
-        >
-          <!-- TODO: use <nuxt-img> -->
-          <img
-            class="w-7 h-7 flex rounded-full text-white border-4 border-white dark:border-sky-darkest"
-            :src="'https://api.nuxtjs.org/api/ipx/s_44,f_webp/gh_avatar/' + contributor.login"
-            :alt="contributor.name|| contributor.login"
-            format="jpg"
-            width="28"
-            height="28"
-          >
         </a>
       </div>
     </div>
@@ -162,10 +114,9 @@ function numberFormat (num: number, options = { precision: 1 }) {
   return numberFormatter(num, options)
 }
 
-function iconUrl ({ icon }: ModuleInfo) {
-  if (icon) {
-    return `/icons/${icon}`
-  }
+function extractHostname (url: string) {
+  const { hostname } = new URL(url)
+  return hostname
 }
 
 function iconPlaceholder ({ category }: ModuleInfo) {
