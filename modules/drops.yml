@@ -1,0 +1,4 @@
+url: https://www.drops.live/
+manifest: assets/manifest_drops.json
+category: Weather
+support: mobile-only

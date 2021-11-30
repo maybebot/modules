@@ -1,21 +1,8 @@
 export const categories = [
-  'Analytics',
-  'CMS',
-  'CSS',
-  'Database',
-  'Date',
-  'Deployment',
-  'Devtools',
-  'Extensions',
-  'Ecommerce',
-  'Fonts',
-  'Images',
-  'Libraries',
-  'Monitoring',
-  'Payment',
-  'Performance',
-  'Request',
-  'SEO',
-  'Security',
-  'UI'
+  'Social',
+  'Travel',
+  'Shopping',
+  'Weather',
+  'Messaging',
+  'Food&Drinks'
 ] as const
