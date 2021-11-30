@@ -23,11 +23,6 @@
         <div class="flex flex-wrap justify-between gap-y-5 w-full">
           <!-- Header -->
           <TheHeader />
-          <!-- Stats -->
-          <TheStats
-            :modules="state.modules"
-            :stats="state.stats"
-          />
         </div>
       </div>
       <img
@@ -62,23 +57,6 @@
           >
             <UnoIcon class="i-carbon-close" />
           </button>
-          <!-- Nuxt versions -->
-          <FilterButtons
-            title="Nuxt version"
-            subtitle="Show modules working with:"
-            :items="VERSIONS"
-            :selected-item="selectedVersion"
-            @toggle="toggleVersion"
-          >
-            <template #icon="{ icon }">
-              <component :is="icon" class="h-6 w-6 flex-none inline-block" />
-            </template>
-            <template #badge="{ key }">
-              <div v-if="key!=='2.x'" class="text-green-600 dark:text-green-400 border border-current bg-green-500/10 px-1.5 text-xs rounded-full">
-                Beta
-              </div>
-            </template>
-          </FilterButtons>
 
           <!-- Categories -->
           <FilterButtons

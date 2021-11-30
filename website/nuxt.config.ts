@@ -1,8 +1,8 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 
-const title = 'Explore Nuxt Modules'
-const description = 'Discover our list of modules to supercharge your Nuxt project. Created by the Nuxt team and community.'
-const url = 'https://modules.nuxtjs.org'
+const title = 'Discover PWAs'
+const description = 'Explore Progressive Web Apps, websites that have an installable app in them. On a \'store\' that doesn\'t really sell anything.'
+const url = 'https://pwastore.net'
 
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
@@ -62,13 +62,13 @@ export default defineNuxtConfig({
   },
   plugins: ['~/plugins/v-tooltip.ts'],
   manifest: {
-    name: 'Nuxt Modules',
-    short_name: 'Nuxt Modules',
-    description: 'Explore Nuxt Modules',
+    name: 'PWAstore',
+    short_name: 'PWAstore',
+    description: 'Discover PWAs',
     theme_color: '#003c3c'
   },
   plausible: {
-    domain: 'modules.nuxtjs.org'
+    domain: 'pwastore.net'
   },
   colorMode: {
     preference: 'system',
