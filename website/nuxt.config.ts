@@ -77,5 +77,6 @@ export default defineNuxtConfig({
   },
   bridge: {
     vite: true
-  }
+  },
+  modern: true
 })

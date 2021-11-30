@@ -3,7 +3,7 @@
     <slot name="head" />
     <div class="flex" :class="isSearchOpen ? 'hidden': ''">
       <a href="/" class="inline-flex text-2xl">
-        <IconNuxtLogo alt="Nuxt" width="40" height="40" />
+        <img src="/icon.png" alt="PWA Store" width="40" height="40">
         <span class="my-auto ml-1 pt-0.5">
           PWAstore
         </span>
